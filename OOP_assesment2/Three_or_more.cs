@@ -227,7 +227,7 @@ namespace OOP_assesment2
             int ans = 0;
 
             //cheking if user input is needed
-            if (selection == 1 && turn == 1 || selection == 2 && turn == 2) 
+            if (selection == 2 && turn == 1 || selection == 2 && turn == 2 || selection == 1 && turn == 1) 
             {
                 ans = newSelection("would you like to roll the 1.non matching die or 2.all ??", 2);
                 //returning the users input
