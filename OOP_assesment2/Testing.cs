@@ -24,7 +24,7 @@ namespace OOP_assesment2
             if (selection == 1)
             {
                 //creating a new array to store the returned die
-                int[] die = { };
+                int[] die = new int[] { };
 
                 //creating a new instance of the sevens out class
                 var sevens = new Sevens__out();
