@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OOP_assesment2
 {
-    internal class Sevens__out
+    internal class Sevens__out : game
     {
         // a public variable within the class to store the total score
         public int total = 0;
@@ -32,7 +32,7 @@ namespace OOP_assesment2
                 //creating 2 dice objects
                 Die1 = RollDice();
                 Die2 = RollDice();
-
+                
                 //outputting the results of the rolls and the roll number
                 Console.WriteLine(RollNum + ". " + Die1 + ", " + Die2);
 
@@ -71,15 +71,8 @@ namespace OOP_assesment2
             
 
         }
-        /// <summary>
-        /// calls the die function to get a random number between 1 and 6
-        /// </summary>
-        /// <returns>a random integer between 1 and 6</returns>
-        private int RollDice()
-        {
-            var Dice = new Die();
-            return Dice.Roll();
-        }
+
+
         /// <summary>
         /// it will check the result of the 2 die rolled, if they are the same it 
         /// will add double the sum of the die to the total.

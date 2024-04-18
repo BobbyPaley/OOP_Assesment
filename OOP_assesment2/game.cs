@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,6 +10,17 @@ namespace OOP_assesment2
 {
     internal class game
     {
+        /// <summary>
+        /// creating a protected function to be inherited by the children
+        /// classes Three_or_more and Sevens_out
+        /// </summary>
+        /// <returns>a new die number between 1 and 6</returns>
+        protected int RollDice()
+        {
+            Console.WriteLine("success");
+            var Dice = new Die();
+            return Dice.Roll();
+        }
         /// <summary>
         /// creating an instance of the random function so it isn't
         /// called multiple times throughout the code
@@ -25,7 +37,7 @@ namespace OOP_assesment2
             var stats = new statistics();
 
             //creating a variable to store the users input
-            int selection = 0;
+            
 
             //setting the exit boolean to false 
             bool exit = false;
@@ -33,6 +45,7 @@ namespace OOP_assesment2
             //loop that will repeat until the user decides to exit
             while (exit == false) 
             {
+                int selection = 0;
                 while (true)
                 {
                     //getting user input for what they would like to do
@@ -62,6 +75,9 @@ namespace OOP_assesment2
                 }
                 else if(selection == 2)
                 {
+                    var threes = new Three_or_more();
+                    threes.main();
+                    stats.update(0, 2);
 
                 }
                 //if the user selects 3 then it will call the stats function from the statistics class

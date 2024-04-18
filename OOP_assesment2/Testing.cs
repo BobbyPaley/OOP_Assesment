@@ -42,7 +42,27 @@ namespace OOP_assesment2
             }
             else if (selection == 2)
             {
+                var threes = new Three_or_more();
+                int[] results = threes.testing();
 
+                //checking that score adds correctly
+                Debug.Assert((results[0] + results[2]) == results[1]);
+                //checking that the right amount of score is added
+                if (results[3] == 3)
+                {
+                    Debug.Assert(results[2] == 3);
+                }
+                else if (results[3] == 6) 
+                {
+                    Debug.Assert(results[2] == 6);                
+                }
+                else if (results[3] == 12)
+                {
+                    Debug.Assert(results[2] == 12);
+                }
+                //checking that the final score is >= 20
+                Debug.Assert(results[1] >= 20);
+                return;
             }
             else if(selection == 3)
             {
