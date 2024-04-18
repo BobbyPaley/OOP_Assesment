@@ -113,8 +113,7 @@ namespace OOP_assesment2
         /// <returns>both final die values in an array</returns>
         public int[] testing()
         {
-            //creating a new array to store the final 2 dice numbers
-            int[] result = new int[2];
+            
 
             //creating 3 new blank integers
             int Die1, Die2, check;
@@ -133,8 +132,10 @@ namespace OOP_assesment2
                 //if 7 it will add both numbers to an array and return them so they can be checked
                 if (check == 0)
                 {
-                    result[0] = Die1;
-                    result[1] = Die2;
+                    //adding both die rolls to an array
+                    int[] result = new int[2] { Die1, Die2};
+
+                    //returning the array
                     return result;
 
 

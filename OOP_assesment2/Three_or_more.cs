@@ -13,37 +13,15 @@ namespace OOP_assesment2
         //creating ints to store the players score
         int player1 = 0, player2 = 0;
 
-        
-        
-
         /// <summary>
         /// lets the user select 1 or 2 player, calls the game function
         /// and outputs the winner
         /// </summary>
         public void main()
         {
-            //creating an in for the users selection
-            int selection = 0;
+            //getting the user selection
+            int selection = newSelection("1 or 2 player", 2);
 
-            //looping until the user gives a valid input
-            while (true)
-            {
-                //getting user input for what they would like to do
-                try
-                {
-                    Console.WriteLine("1 or 2 player");
-                    selection = int.Parse(Console.ReadLine());
-                    if (selection == 1 || selection == 2 )
-                    {
-                        break;
-                    }
-                    Console.WriteLine("please enter 1 or 2");
-                }
-                catch
-                {
-                    Console.WriteLine("invalid input");
-                }
-            }
             //calling the game function and setting the result to an integer
             int winner = game(selection);
 
@@ -62,18 +40,18 @@ namespace OOP_assesment2
         private int[] rollDie(int x)
         {
             //creating a new array x length
-            int[] newArray = new int[x];
+            int[] NewArray = newArray(x);
 
             //looping x amount of times, adding a new dice to the 
             //array every time
-            for (int i = 0; i < newArray.Length; i++)
+            for (int i = 0; i < NewArray.Length; i++)
             {
                 //adding the die to the array
-                newArray[i] = RollDice();
+                NewArray[i] = RollDice();
             }
 
             //returning the array containing the die
-            return newArray;  
+            return NewArray;  
         } 
 
         /// <summary>
@@ -84,7 +62,7 @@ namespace OOP_assesment2
         private int[] checkDie(int[] Dice)
         {
             //creating a new array to be returned
-            int[] results = new int[2];
+            int[] results = newArray(2);
 
             //creating 3 new ints set to 0
             int num = 0, instances = 0, temp = 0;
@@ -143,7 +121,7 @@ namespace OOP_assesment2
             {
                 //creating a new array to hold the current number with
                 //the most matches
-                int[] newList = new int[instances];
+                int[] newList = newArray(instances);
 
                 //adding the num instances amount of times to an array
                 for (int i = 0;i < instances;i++)
@@ -251,24 +229,7 @@ namespace OOP_assesment2
             //cheking if user input is needed
             if (selection == 1 && turn == 1 || selection == 2 && turn == 2) 
             {
-                while (true)
-                {
-                    //getting user input for what they would like to do
-                    try
-                    {
-                        Console.WriteLine("would you like to roll the 1.non matching die or 2.all ??");
-                        ans = int.Parse(Console.ReadLine());
-                        if (ans == 1 || ans == 2)
-                        {
-                            break;
-                        }
-                        Console.WriteLine("please enter 1 or 2");
-                    }
-                    catch
-                    {
-                        Console.WriteLine("invalid input");
-                    }
-                }
+                ans = newSelection("would you like to roll the 1.non matching die or 2.all ??", 2);
                 //returning the users input
                 return ans;
             }
@@ -389,31 +350,42 @@ namespace OOP_assesment2
                 return player2;
             }
         }
+        /// <summary>
+        /// runs through the game functions until a game over is called
+        /// and returning the nececarry data for testing purposes
+        /// </summary>
+        /// <returns></returns>
         public int[] testing()
         {
-            int[] results = new int[4];
+            
+            //creating an int to store the score before points are added
             int scorebf = 0;
             
+            //lloping until score is 20 or higher
             while(true)
             {
+                //creating a new array of 5 die
                 int[] newDie = rollDie(5);
+
+                //checking for matches passing the new array through as a parameter
                 int[] check = checkDie(newDie);
+
+                //setting the current score 
                 scorebf = player1;
+
+                //updating the score accordingly
                 int pointAdd = updateScore(check[1], 1);
                 
+                //if a win is found
                 if (checkWin() == true)
                 {
-                    results[0] = scorebf;
-                    results[1] = player1;
-                    results[2] = pointAdd;
-                    results[3] = check[1];
+                    //adding all of the nececary data to an array to pass back
+                    int[] results = new int[4] { scorebf, player1, pointAdd, check[1] };
+
+                    //returning the new array
                     return results;
                 }
-
-
             }
         }
-
-
     }
 }
