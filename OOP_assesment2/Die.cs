@@ -30,11 +30,11 @@ namespace OOP_assesment2
         public int Roll()
         {
             //rolling a number between 1 and 6
-            int newRoll = game.RandomInstance.Next(1, 7);
+            int new_Roll = game.RandomInstance.Next(1, 7);
             //setting the roll to the current value
-            current_Value = newRoll;
+            current_Value = new_Roll;
             //returning the roll
-            return newRoll;
+            return new_Roll;
         }
 
     }

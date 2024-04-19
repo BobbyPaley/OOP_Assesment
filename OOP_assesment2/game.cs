@@ -26,7 +26,7 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="n">size of the array</param>
         /// <returns>new array of length n</returns>
-        protected int[] newArray(int n)
+        protected int[] NewArray(int n)
         {
             return new int[n];
         }
@@ -36,7 +36,7 @@ namespace OOP_assesment2
         /// <param name="question">the string of text to be outputted on the terminal</param>
         /// <param name="num">the number of options to chose from</param>
         /// <returns>the user selection</returns>
-        public static int newSelection(string question, int num)
+        public static int NewSelection(string question, int num)
         {
             //creating an empty int to store the selection value
             int selection = 0;
@@ -80,7 +80,7 @@ namespace OOP_assesment2
         public static Random RandomInstance { get; } = new Random();
 
         /// <summary>
-        /// the main function where all of the code is run from 
+        /// the Main function where all of the code is run from 
         /// </summary>
         /// <param name="args"></param>
         static void Main(string[] args)
@@ -97,56 +97,56 @@ namespace OOP_assesment2
             //loop that will repeat until the user decides to exit
             while (exit == false) 
             {
-                int selection = newSelection("1.Sevens out - 2.three or more - 3.statistics - 4.testing - 5.exit", 5);
+                int selection = NewSelection("1.Sevens out - 2.three or more - 3.statistics - 4.Test - 5.exit", 5);
                 
                 
-                //if the user selects the number 1 it will run the sevens out game
-                //then it will check if there is a new high score by calling the update
+                //if the user selects the number 1 it will run the sevens out Game
+                //then it will check if there is a new high score by calling the Update
                 //function from the statistics class
                 if (selection == 1)
                 {
-                    //creating a new instance of the sevens out game
+                    //creating a new instance of the sevens out Game
                     var sevens = new Sevens__out();
 
-                    //running the game and storing the returned final score
-                    int score = sevens.main();
+                    //running the Game and storing the returned final score
+                    int score = sevens.Main();
 
                     //updating the statistics
-                    stats.update(score, 1);
+                    stats.Update(score, 1);
                 }
-                //if the user selects 2 it will run the three or more game
+                //if the user selects 2 it will run the three or more Game
                 else if(selection == 2)
                 {
                     //creating a new instance of three or more
                     var threes = new Three_or_more();
 
-                    //running the game
-                    threes.main();
+                    //running the Game
+                    threes.Main();
 
-                    //updating the game accordingly
-                    stats.update(0, 2);
+                    //updating the Game accordingly
+                    stats.Update(0, 2);
 
                 }
-                //if the user selects 3 then it will call the stats function from the statistics class
+                //if the user selects 3 then it will call the Stats function from the statistics class
                 else if (selection == 3)
                 {
                     //outputting the statistics
-                    stats.stats();
+                    stats.Stats();
                 }
                 //if 4 is selected it will test the code
                 else if (selection == 4)
                 {
-                    //creating a new instance of the testing class
+                    //creating a new instance of the Test class
                     var test = new Testing();
 
-                    //calling the testing function
-                    test.testing();
+                    //calling the Test function
+                    test.Test();
 
                 }
                 //if selection is 5 it will end the code
                 else if (selection == 5)
                 {
-                    //will exit the game class, in turn exiting the game
+                    //will exit the Game class, in turn exiting the Game
                     Console.WriteLine("exiting....");
 
                     return;

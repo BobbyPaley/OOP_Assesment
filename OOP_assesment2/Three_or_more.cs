@@ -11,23 +11,23 @@ namespace OOP_assesment2
     internal class Three_or_more : game
     {
         //creating ints to store the players score
-        int player1 = 0, player2 = 0;
+        int player_1 = 0, player_2 = 0;
 
         /// <summary>
-        /// lets the user select 1 or 2 player, calls the game function
+        /// lets the user select 1 or 2 player, calls the Game function
         /// and outputs the winner
         /// </summary>
-        public void main()
+        public void Main()
         {
             //getting the user selection
-            int selection = newSelection("1 or 2 player", 2);
+            int selection = NewSelection("1 or 2 player", 2);
 
-            //calling the game function and setting the result to an integer
-            int winner = game(selection);
+            //calling the Game function and setting the result to an integer
+            int winner = Game(selection);
 
             //outputting the winner and their score, calling the getscore function
             //to get the corresponding score for the winner
-            Console.WriteLine("player " + winner + " wins with a score of " + getScore(winner));
+            Console.WriteLine("player " + winner + " wins with a score of " + GetScore(winner));
         }
 
 
@@ -37,21 +37,21 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="x">number of dice being rolled</param>
         /// <returns>an array containing the new dice</returns>
-        private int[] rollDie(int x)
+        private int[] RollDie(int x)
         {
             //creating a new array x length
-            int[] NewArray = newArray(x);
+            int[] new_Array = NewArray(x);
 
             //looping x amount of times, adding a new dice to the 
             //array every time
-            for (int i = 0; i < NewArray.Length; i++)
+            for (int i = 0; i < new_Array.Length; i++)
             {
                 //adding the die to the array
-                NewArray[i] = RollDice();
+                new_Array[i] = RollDice();
             }
 
             //returning the array containing the die
-            return NewArray;  
+            return new_Array;  
         } 
 
         /// <summary>
@@ -59,10 +59,10 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="Dice">an array containing 5 die</param>
         /// <returns>an array with the number and its instances</returns>
-        private int[] checkDie(int[] Dice)
+        private int[] CheckDie(int[] Dice)
         {
             //creating a new array to be returned
-            int[] results = newArray(2);
+            int[] results = NewArray(2);
 
             //creating 3 new ints set to 0
             int num = 0, instances = 0, temp = 0;
@@ -108,40 +108,40 @@ namespace OOP_assesment2
         /// <param name="num">the number with the most matches</param>
         /// <param name="instances">the amount of matches</param>
         /// <returns>new array with corresponding numbers</returns>
-        private int[] twomatch(int selection, int num, int instances)
+        private int[] TwoMatch(int selection, int num, int instances)
         {
             //if 2 is selected it will return a new array of 5 die
             if (selection == 2)
             {
                 //rolling 5 die
-                return rollDie(5);
+                return RollDie(5);
             }
             //if 1 is selected
             else
             {
                 //creating a new array to hold the current number with
                 //the most matches
-                int[] newList = newArray(instances);
+                int[] new_List = NewArray(instances);
 
                 //adding the num instances amount of times to an array
                 for (int i = 0;i < instances;i++)
                 {
-                    newList[i] = num;
+                    new_List[i] = num;
                 }
                 //combining the array with an array with 3 / 4 die
-                newList = newList.Concat(rollDie(5 - instances)).ToArray();
+                new_List = new_List.Concat(RollDie(5 - instances)).ToArray();
 
                 //retuning the new array
-                return newList;
+                return new_List;
             }
         }
 
         /// <summary>
-        /// the main game function that will loop through the main game functions
+        /// the Main Game function that will loop through the Main Game functions
         /// </summary>
         /// <param name="selection">the user selection for 1 or 2 player</param>
         /// <returns>the winning player</returns>
-        private int game(int selection)
+        private int Game(int selection)
         {
             //declaring the first turn
             int turn = 1;
@@ -153,16 +153,16 @@ namespace OOP_assesment2
                 Console.WriteLine("turn = " + turn);
 
                 //creating an array with 5 new dice
-                int[] newDie = rollDie(5);
+                int[] new_Die = RollDie(5);
 
                 //creating an array to hold the number with
                 //the most matches and its amount of matches
-                int[] results = checkDie(newDie);
+                int[] results = CheckDie(new_Die);
 
                 //outputting the results of the roll
-                displayRoll(newDie);
+                DisplayRoll(new_Die);
 
-                //waiting for the user press a button so the game dosen't move to fast
+                //waiting for the user press a button so the Game dosen't move to fast
                 Console.ReadLine();
 
                 //if the number of matches is 1 or 2 it will let the user roll
@@ -171,28 +171,28 @@ namespace OOP_assesment2
                 {
                     //calling the selection function, checking if all dice are being rolled
                     //or just the non matching die
-                    int select = Selection(selection, turn);
+                    int selection_ = Selection(selection, turn);
 
                     //calling the two match function to create a new array of die
-                    newDie = twomatch(select, results[0], results[1]);
+                    new_Die = TwoMatch(selection_, results[0], results[1]);
 
                     //checking the die for matches
-                    results = checkDie(newDie);
+                    results = CheckDie(new_Die);
 
                     //displaying the output of the new roll
-                    displayRoll(newDie);
+                    DisplayRoll(new_Die);
 
                 }
                 //updating the current players score
-                updateScore(results[1], turn);
+                UpdateScore(results[1], turn);
 
                 //outputting the current scores
-                Console.WriteLine("Player 1 = " + player1 + " player 2 = " + player2);
+                Console.WriteLine("Player 1 = " + player_1 + " player 2 = " + player_2);
 
                 //checking if the win condition has been met
-                bool win = checkWin();
+                bool win = CheckWin();
 
-                //if it has it will break out of the game loop
+                //if it has it will break out of the Game loop
                 if (win == true)
                 {
                     break;
@@ -229,7 +229,7 @@ namespace OOP_assesment2
             //cheking if user input is needed
             if (selection == 2 && turn == 1 || selection == 2 && turn == 2 || selection == 1 && turn == 1) 
             {
-                ans = newSelection("would you like to roll the 1.non matching die or 2.all ??", 2);
+                ans = NewSelection("would you like to roll the 1.non matching die or 2.all ??", 2);
                 //returning the users input
                 return ans;
             }
@@ -262,39 +262,40 @@ namespace OOP_assesment2
         /// <summary>
         /// displaying the dice rolled
         /// </summary>
-        /// <param name="newDice">an array of 5 dice</param>
-        private void displayRoll(int[] newDice)
+        /// <param name="new_Dice">an array of 5 dice</param>
+        private void DisplayRoll(int[] new_Dice
+            )
         {
             //outputting all 5 dice
-            Console.WriteLine("you rolled " + newDice[0] + ", " + newDice[1] + ", " + newDice[2] + ", " + newDice[3] + ", " + newDice[4]);
+            Console.WriteLine("you rolled " + new_Dice[0] + ", " + new_Dice[1] + ", " + new_Dice[2] + ", " + new_Dice[3] + ", " + new_Dice[4]);
         }
 
         /// <summary>
         /// updates the players scores
         /// </summary>
-        /// <param name="increments">the amount of matches</param>
+        /// <param name="matches">the amount of matches</param>
         /// <param name="turn">the current turn</param>
-        private int updateScore(int increments, int turn)
+        private int UpdateScore(int matches, int turn)
         {
             //if there is 3 matches it will add 3 to the current players score
-            if (increments == 3)
+            if (matches == 3)
             {
-                //caling thhe update function
-                update(turn, 3);
+                //caling thhe Update function
+                Update(turn, 3);
                 return 3;
             }
             //if 4 matches it will add 6
-            else if (increments == 4)
+            else if (matches == 4)
             {
-                //calling the update function
-                update(turn, 6);
+                //calling the Update function
+                Update(turn, 6);
                 return 6;
             }
             //if all 5 match it will add 12 to score
-            else if (increments == 5)
+            else if (matches == 5)
             {
-                //calling the update function
-                update(turn, 12);
+                //calling the Update function
+                Update(turn, 12);
                 return 12;
             }
             else { return 0; }
@@ -305,27 +306,27 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="turn">the current turn</param>
         /// <param name="points">the amount of points to be added</param>
-        private void update(int turn, int points)
+        private void Update(int turn, int points)
         {
             //if turn is one it will give them the points 
             if (turn == 1)
             {
-                player1 = player1 +  points;
+                player_1 = player_1 +  points;
             }
             //if tuen is two it will give them the points
             else if (turn == 2)
             {
-                player2 = player2 + points;
+                player_2 = player_2 + points;
             }
         }
         /// <summary>
         /// checking if either player has met the win condition
         /// </summary>
         /// <returns>bool saying if the win condition has been met</returns>
-        private bool checkWin()
+        private bool CheckWin()
         {
             //checking if either score is >= 20
-            if(player1 >= 20 || player2 >= 20)
+            if(player_1 >= 20 || player_2 >= 20)
             {
                 return true;
             }
@@ -339,48 +340,48 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="turn">current turn</param>
         /// <returns>their score</returns>
-        private int getScore(int turn)
+        private int GetScore(int turn)
         {
             if(turn == 1)
             {
-                return player1;
+                return player_1;
             }
             else
             {
-                return player2;
+                return player_2;
             }
         }
         /// <summary>
-        /// runs through the game functions until a game over is called
-        /// and returning the nececarry data for testing purposes
+        /// runs through the Game functions until a Game over is called
+        /// and returning the nececarry data for Test purposes
         /// </summary>
         /// <returns></returns>
-        public int[] testing()
+        public int[] Testing()
         {
             
             //creating an int to store the score before points are added
-            int scorebf = 0;
+            int score_Before = 0;
             
             //lloping until score is 20 or higher
             while(true)
             {
                 //creating a new array of 5 die
-                int[] newDie = rollDie(5);
+                int[] new_Die = RollDie(5);
 
                 //checking for matches passing the new array through as a parameter
-                int[] check = checkDie(newDie);
+                int[] check = CheckDie(new_Die);
 
                 //setting the current score 
-                scorebf = player1;
+                score_Before = player_1;
 
                 //updating the score accordingly
-                int pointAdd = updateScore(check[1], 1);
+                int point_Add = UpdateScore(check[1], 1);
                 
                 //if a win is found
-                if (checkWin() == true)
+                if (CheckWin() == true)
                 {
                     //adding all of the nececary data to an array to pass back
-                    int[] results = new int[4] { scorebf, player1, pointAdd, check[1] };
+                    int[] results = new int[4] { score_Before, player_1, point_Add, check[1] };
 
                     //returning the new array
                     return results;
