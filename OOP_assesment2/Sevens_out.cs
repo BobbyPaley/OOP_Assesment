@@ -84,24 +84,30 @@ namespace OOP_assesment2
         /// <returns>an integer determining what state the Game is in</returns>
         private int CheckDice(int Die1, int Die2)
         {
+            //creating 2 new dice
+            var dice = new List<int>
+            {
+                RollDice(),
+                RollDice()
+            };
             //if the sum of the die is 7, 1 is returned indicating that the Game is over
-            if ((Die1 + Die2) == 7)
+            if ((dice[0] + dice[1]) == 7)
             {
                 return 0;
             }
 
             //if both die are the same it will add double the sum of the dice to the total
             //returning 1 to indicate that a double has been rolled
-            else if (Die2 == Die1)
+            else if (dice[0] == dice[1])
             {
                 
-                total = total + (2 * (Die1 + Die2));
+                total = total + (2 * (dice[0] + dice[1]));
                 return 1;
             }
             //adding the sum of the dice to the total
             else
             {
-                total = total + Die1 + Die2;
+                total = total + dice[0] + dice[1];
                 return 2;
             }
 
@@ -141,9 +147,8 @@ namespace OOP_assesment2
                 }
 
             }
-            
-        }
-        
 
+
+        }
     }
 }
