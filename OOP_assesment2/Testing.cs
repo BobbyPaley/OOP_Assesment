@@ -133,7 +133,8 @@ namespace OOP_assesment2
                 //outputting the results of the rolls
                 Console.WriteLine("ones = " + one + "\ntwos = " + two + "\nthrees = " + three + "\nfours = " + four + "\nfives = " + five + "\nsixes = " + six);
 
-                
+                //testing all of the results of the rolls for any outliers
+                //making sure they're all within 10% of the mean die roll
                 Debug.Assert(CheckFair(one, temp));
                 Debug.Assert(CheckFair(two, temp));
                 Debug.Assert(CheckFair(three, temp));
@@ -144,18 +145,28 @@ namespace OOP_assesment2
                 Console.WriteLine("die within 10% of expected values");
                 return;
             }
+            //exiting if user selects 4
             else if (selection == 4)
             {
                 return;
             }
             
         }
+        /// <summary>
+        /// checking if the dice are within expected range
+        /// </summary>
+        /// <param name="num">number of dice</param>
+        /// <param name="mean">mean number</param>
+        /// <returns>if within range</returns>
         private bool CheckFair(int num, int mean)
         {
+            //checking if the number is 10% above the mean or below
             if (num < mean - (mean / 10) || num < mean + (mean / 10))
             {
+                //returning true if so
                 return true;
             }
+            //else false
             else { return false; }
         }
 
