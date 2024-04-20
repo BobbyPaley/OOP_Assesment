@@ -54,8 +54,6 @@ namespace OOP_assesment2
                 {
                     Console.WriteLine("double rolled, 2x score");
                 }
-                
-                //incrementing the roll number count
 
                 //outputting then current total
                 Console.WriteLine("total = " + total);

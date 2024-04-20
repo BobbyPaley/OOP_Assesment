@@ -113,10 +113,7 @@ namespace OOP_assesment2
         static void Main(string[] args)
         {
             //creating an instance of the statistics class
-            var stats = new statistics();
-
-            //creating a variable to store the users input
-            
+            var stats = new statistics();            
 
             //setting the exit boolean to false 
             bool exit = false;

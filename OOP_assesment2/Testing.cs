@@ -11,7 +11,7 @@ namespace OOP_assesment2
     internal class Testing : game
     {
         /// <summary>
-        /// Test function
+        /// runs user selected testing
         /// </summary>
         public void Test() 
         {
@@ -130,11 +130,13 @@ namespace OOP_assesment2
                     //taking one away from number of die left to roll
                     roll_Num--;
                 }
+
                 //outputting the results of the rolls
                 Console.WriteLine("ones = " + one + "\ntwos = " + two + "\nthrees = " + three + "\nfours = " + four + "\nfives = " + five + "\nsixes = " + six);
 
                 //testing all of the results of the rolls for any outliers
                 //making sure they're all within 10% of the mean die roll
+                //in turn proving the die to be fair
                 Debug.Assert(CheckFair(one, temp));
                 Debug.Assert(CheckFair(two, temp));
                 Debug.Assert(CheckFair(three, temp));
@@ -142,7 +144,10 @@ namespace OOP_assesment2
                 Debug.Assert(CheckFair(five, temp));
                 Debug.Assert(CheckFair(six, temp));
 
+                //outputting appropriate message to the user
                 Console.WriteLine("die within 10% of expected values");
+
+                //returning out of test function
                 return;
             }
             //exiting if user selects 4
