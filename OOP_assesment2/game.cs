@@ -52,8 +52,9 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="question">the string of text to be outputted on the terminal</param>
         /// <param name="num">the number of options to chose from</param>
+        /// <param name="min">the minimum value</param>
         /// <returns>the user selection</returns>
-        public static int NewSelection(string question, int num)
+        public static int NewSelection(string question, int num, int min)
         {
             //creating an empty int to store the selection value
             int selection = 0;
@@ -71,13 +72,13 @@ namespace OOP_assesment2
                     selection = int.Parse(Console.ReadLine());
 
                     //cheking if the user input is valid
-                    if (selection >= 1 && selection <= num)
+                    if (selection >= min && selection <= num)
                     {
                         //breaking out of the loop
                         break;
                     }
                     //if user input is out of range
-                    Console.WriteLine("please enter a number between 1 - " + num);
+                    Console.WriteLine("please enter a number between " + min + " - " + num);
                 }
                 catch
                 {
@@ -123,7 +124,7 @@ namespace OOP_assesment2
             //loop that will repeat until the user decides to exit
             while (exit == false) 
             {
-                int selection = NewSelection("1.Sevens out - 2.three or more - 3.statistics - 4.Test - 5.exit", 5);
+                int selection = NewSelection("1.Sevens out - 2.three or more - 3.statistics - 4.Test - 5.exit", 5, 1);
                 
                 
                 //if the user selects the number 1 it will run the sevens out Game

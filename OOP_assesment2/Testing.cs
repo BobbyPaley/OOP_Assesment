@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,7 +19,7 @@ namespace OOP_assesment2
             Console.WriteLine("what would you like to test");
  
             //calling the user selection function
-            int selection = NewSelection("1.Sevens out - 2.three or more - 3.exit", 3);
+            int selection = NewSelection("1.Sevens out - 2.three or more - 3.Die fairness - 4.exit", 4, 1);
             
             //if user wants to sets sevens out
             if (selection == 1)
@@ -85,12 +86,77 @@ namespace OOP_assesment2
                 //returning back to Game class
                 return;
             }
-            //if user wants to exit
+            //if user wants to check the fairness of the die
             else if(selection == 3)
             {
-                //exiting out of the class
+                //creating ins to store the results of the die
+                int one = 0, two = 0, three = 0, four = 0, five = 0, six = 0;
+
+                //letting the user select a number of dice to roll
+                int roll_Num = NewSelection("how many dice would you like to roll", int.MaxValue, 2);
+
+                int temp = roll_Num;
+                //rolling 10000 dice
+                while(roll_Num != 0)
+                {
+                    //rolling a new dice
+                    int die = RollNum();
+
+                    //incrementing the dice number counters                  
+                    if (die == 1)
+                    {
+                        one++;
+                    }
+                    else if (die == 2)
+                    {
+                        two++;
+                    }
+                    else if (die == 3)
+                    {
+                        three++;
+                    }
+                    else if (die == 4)
+                    {
+                        four++;
+                    }
+                    else if (die == 5)
+                    {
+                        five++;
+                    }
+                    else if (die == 6)
+                    {
+                        six++;
+                    }
+                    //taking one away from number of die left to roll
+                    roll_Num--;
+                }
+                //outputting the results of the rolls
+                Console.WriteLine("ones = " + one + "\ntwos = " + two + "\nthrees = " + three + "\nfours = " + four + "\nfives = " + five + "\nsixes = " + six);
+
+                
+                Debug.Assert(CheckFair(one, temp));
+                Debug.Assert(CheckFair(two, temp));
+                Debug.Assert(CheckFair(three, temp));
+                Debug.Assert(CheckFair(four, temp));
+                Debug.Assert(CheckFair(five, temp));
+                Debug.Assert(CheckFair(six, temp));
+
+                Console.WriteLine("die within 10% of expected values");
                 return;
             }
+            else if (selection == 4)
+            {
+                return;
+            }
+            
+        }
+        private bool CheckFair(int num, int mean)
+        {
+            if (num < mean - (mean / 10) || num < mean + (mean / 10))
+            {
+                return true;
+            }
+            else { return false; }
         }
 
     }

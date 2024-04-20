@@ -20,7 +20,7 @@ namespace OOP_assesment2
         public void Main()
         {
             //getting the user selection
-            int selection = NewSelection("1 or 2 player", 2);
+            int selection = NewSelection("1 or 2 player", 2, 1);
 
             //calling the Game function and setting the result to an integer
             int winner = Game(selection);
@@ -202,7 +202,7 @@ namespace OOP_assesment2
             //cheking if user input is needed
             if (selection == 2 && turn == 1 || selection == 2 && turn == 2 || selection == 1 && turn == 1) 
             {
-                ans = NewSelection("would you like to roll the 1.non matching die or 2.all ??", 2);
+                ans = NewSelection("would you like to roll the 1.non matching die or 2.all ??", 2, 1);
                 //returning the users input
                 return ans;
             }
