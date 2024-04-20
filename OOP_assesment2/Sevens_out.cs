@@ -106,31 +106,44 @@ namespace OOP_assesment2
         /// </summary>
         /// <returns>both final die values in an array</returns>
         public int[] Testing()
-        {      
-
-            //a loop that will repeat the Game loop until a 7 is rolled
-            while (true)
+        {
+            //keeping the code within a try block making sure no errors happen
+            try
             {
-                //rolling 2 new dice objects
-                int[] dice = RollDie(2);
 
-                //cheking if the result of the dice roll is 7
-                int check = CheckDice(dice[0], dice[1]);
 
-                //if 7 it will add both numbers to an array and return them so they can be checked
-                if (check == 0)
+                //a loop that will repeat the Game loop until a 7 is rolled
+                while (true)
                 {
-                    //adding both die rolls to an array
-                    int[] result = new int[2] { dice[0], dice[1] };
+                    //rolling 2 new dice objects
+                    int[] dice = RollDie(2);
 
-                    //returning the array
-                    return result;
+                    //cheking if the result of the dice roll is 7
+                    int check = CheckDice(dice[0], dice[1]);
 
+                    //if 7 it will add both numbers to an array and return them so they can be checked
+                    if (check == 0)
+                    {
+                        //adding both die rolls to an array
+                        int[] result = new int[2] { dice[0], dice[1] };
+
+                        //returning the array
+                        return result;
+
+
+                    }
 
                 }
-
             }
+            //if an error occurs
+            catch
+            {
+                //outputting an appropriate message
+                Console.WriteLine("error has occured");
 
+                //returning null
+                return null;
+            }
 
         }
     }
