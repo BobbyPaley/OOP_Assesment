@@ -15,7 +15,7 @@ namespace OOP_assesment2
         /// classes Three_or_more and Sevens_out
         /// </summary>
         /// <returns>a new die number between 1 and 6</returns>
-        protected int RollDice()
+        public virtual int RollNum()
         {
             var Dice = new Die();
             return Dice.Roll();
@@ -30,6 +30,23 @@ namespace OOP_assesment2
         {
             return new int[n];
         }
+        protected int[] RollDie(int x)
+        {
+            //creating a new array x length
+            int[] new_Array = NewArray(x);
+
+            //looping x amount of times, adding a new dice to the 
+            //array every time
+            for (int i = 0; i < new_Array.Length; i++)
+            {
+                //adding the die to the array
+                new_Array[i] = RollNum();
+            }
+
+            //returning the array containing the die
+            return new_Array;
+        }
+
         /// <summary>
         /// getting user input for selections
         /// </summary>
@@ -73,10 +90,19 @@ namespace OOP_assesment2
 
         }
         /// <summary>
+        /// displays the current set of dice
+        /// </summary>
+        /// <param name="dice"> an array of dice </param>
+        public virtual void DisplayRoll(int[] dice)
+        {
+            //outputting all dice
+            Console.WriteLine("dice = " + dice[0] + ", " + dice[1]);
+        }
+        /// <summary>
         /// creating an instance of the random function so it isn't
         /// called multiple times throughout the code
         /// </summary>
-        
+
         public static Random RandomInstance { get; } = new Random();
 
         /// <summary>

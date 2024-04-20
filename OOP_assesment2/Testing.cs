@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace OOP_assesment2
 {
-    internal class Testing
+    internal class Testing : game
     {
         /// <summary>
         /// Test function
@@ -18,13 +18,13 @@ namespace OOP_assesment2
             Console.WriteLine("what would you like to test");
  
             //calling the user selection function
-            int selection = game.NewSelection("1.Sevens out - 2.three or more - 3.exit", 3);
+            int selection = NewSelection("1.Sevens out - 2.three or more - 3.exit", 3);
             
             //if user wants to sets sevens out
             if (selection == 1)
             {
                 //creating a new array to store the returned die
-                int[] die = new int[] { };
+                int[] die = NewArray(2);
 
                 //creating a new instance of the sevens out class
                 var sevens = new Sevens__out();
@@ -35,6 +35,9 @@ namespace OOP_assesment2
 
                 //checking if the die equals 7
                 Debug.Assert(die[0] + die[1] == 7);
+
+                //outputting the 2 dice rolls
+                DisplayRoll(die);
 
                 //outputing the results of the test in the terminal
                 Console.WriteLine("Die1(" + die[0] + ") + Die2("+ die[1] + ") = " + (die[1] + die[0]));

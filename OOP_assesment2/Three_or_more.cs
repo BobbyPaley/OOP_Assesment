@@ -29,43 +29,17 @@ namespace OOP_assesment2
             //to get the corresponding score for the winner
             Console.WriteLine("player " + winner + " wins with a score of " + GetScore(winner));
         }
-
-
-
-        /// <summary>
-        /// rolls an amount of dice specified by the x value 
-        /// </summary>
-        /// <param name="x">number of dice being rolled</param>
-        /// <returns>an array containing the new dice</returns>
-        private int[] RollDie(int x)
-        {
-            //creating a new array x length
-            int[] new_Array = NewArray(x);
-
-            //looping x amount of times, adding a new dice to the 
-            //array every time
-            for (int i = 0; i < new_Array.Length; i++)
-            {
-                //adding the die to the array
-                new_Array[i] = RollDice();
-            }
-
-            //returning the array containing the die
-            return new_Array;  
-        } 
-
+        
         /// <summary>
         /// will check for matches, the number with the most matches will be returned
         /// </summary>
         /// <param name="Dice">an array containing 5 die</param>
-        /// <returns>an array with the number and its instances</returns>
+        /// <returns>an array with the number and its matches</returns>
         private int[] CheckDie(int[] Dice)
         {
-            //creating a new array to be returned
-            int[] results = NewArray(2);
 
             //creating 3 new ints set to 0
-            int num = 0, instances = 0, temp = 0;
+            int num = 0, matches = 0, temp = 0;
 
             //looping for all numbers 1 - 6
             for(int i = 1;i < 7;i++) 
@@ -81,19 +55,18 @@ namespace OOP_assesment2
                         temp++;
                     }
                 }
-                //if temp is greater than instances, it will replace instances with temp
+                //if temp is greater than matches, it will replace matches with temp
                 //setting num to the current number being searched for
-                if (temp > instances)
+                if (temp > matches)
                 {
-                    instances = temp;
+                    matches = temp;
                     num = i;
                 }
                 //resetting temp
                 temp = 0;
             }
-            //adding num and its instances to an array
-            results[0] = num;
-            results[1] = instances;
+            //adding num and its matches to an array
+            int[] results = new int[] { num, matches };
 
             //returning the results
             return results;
@@ -106,9 +79,9 @@ namespace OOP_assesment2
         /// </summary>
         /// <param name="selection">the user sekection</param>
         /// <param name="num">the number with the most matches</param>
-        /// <param name="instances">the amount of matches</param>
+        /// <param name="matches">the amount of matches</param>
         /// <returns>new array with corresponding numbers</returns>
-        private int[] TwoMatch(int selection, int num, int instances)
+        private int[] TwoMatch(int selection, int num, int matches)
         {
             //if 2 is selected it will return a new array of 5 die
             if (selection == 2)
@@ -121,15 +94,15 @@ namespace OOP_assesment2
             {
                 //creating a new array to hold the current number with
                 //the most matches
-                int[] new_List = NewArray(instances);
+                int[] new_List = NewArray(matches);
 
-                //adding the num instances amount of times to an array
-                for (int i = 0;i < instances;i++)
+                //adding the num matches amount of times to an array
+                for (int i = 0;i < matches;i++)
                 {
                     new_List[i] = num;
                 }
                 //combining the array with an array with 3 / 4 die
-                new_List = new_List.Concat(RollDie(5 - instances)).ToArray();
+                new_List = new_List.Concat(RollDie(5 - matches)).ToArray();
 
                 //retuning the new array
                 return new_List;
@@ -258,17 +231,16 @@ namespace OOP_assesment2
             
             return 1;
         }
-
         /// <summary>
-        /// displaying the dice rolled
+        /// displays all 5 dice objects, overriding the DisplayRoll function within game class
         /// </summary>
-        /// <param name="new_Dice">an array of 5 dice</param>
-        private void DisplayRoll(int[] new_Dice
-            )
+        /// <param name="new_Dice"></param>
+        public override void DisplayRoll(int[] new_Dice)
         {
             //outputting all 5 dice
             Console.WriteLine("you rolled " + new_Dice[0] + ", " + new_Dice[1] + ", " + new_Dice[2] + ", " + new_Dice[3] + ", " + new_Dice[4]);
         }
+
 
         /// <summary>
         /// updates the players scores
@@ -351,6 +323,8 @@ namespace OOP_assesment2
                 return player_2;
             }
         }
+
+      
         /// <summary>
         /// runs through the Game functions until a Game over is called
         /// and returning the nececarry data for Test purposes

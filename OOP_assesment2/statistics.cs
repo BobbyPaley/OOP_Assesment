@@ -24,6 +24,9 @@ namespace OOP_assesment2
             //higher than the current high score
             if (int.Parse(list[0]) < score && game == 1)
             {
+                //outputting an appropriate message
+                Console.WriteLine("new high score");
+
                 //changing the highscore in the text file
                 WriteFile(0, score.ToString());
             }

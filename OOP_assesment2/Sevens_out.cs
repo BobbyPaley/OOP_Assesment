@@ -21,24 +21,20 @@ namespace OOP_assesment2
             //introductoary messages
             Console.WriteLine("Welcome to sevens out");
             Console.WriteLine("press enter to roll again");
-            
-            //creating 3 empty integers
-            int die_1, die_2, check;
-            
-            //setting the number of rolls to 1
-            int roll_Num = 1;
+
+           
+            //looping until win condition is met    
             while (true)
             {
                 //creating 2 dice objects
-                die_1 = RollDice();
-                die_2 = RollDice();
+                int[] dice = RollDie(2);
                 
-                //outputting the results of the rolls and the roll number
-                Console.WriteLine(roll_Num + ". " + die_1 + ", " + die_2);
+                //outputting the results of the rolls and the roll number               
+                DisplayRoll(dice);
 
                 //calling the check function to do nececary actions on the 
                 //result of the die rolls
-                check = CheckDice(die_1, die_2);
+                int check = CheckDice(dice[0], dice[1]);
 
                 //if 0 is returned from the CheckDice function, the Game is
                 //over as the result of the die is 7
@@ -60,7 +56,6 @@ namespace OOP_assesment2
                 }
                 
                 //incrementing the roll number count
-                roll_Num++;
 
                 //outputting then current total
                 Console.WriteLine("total = " + total);
@@ -79,35 +74,30 @@ namespace OOP_assesment2
         /// if the sum is 7 it will return 7 to indicate that the Game is over
         /// else it will ad both dice to the sum
         /// </summary>
-        /// <param name="Die1">the first die rolled</param>
-        /// <param name="Die2">the seccond die rolled</param>
+        /// <param name="die_1">the first die rolled</param>
+        /// <param name="die_2">the seccond die rolled</param>
         /// <returns>an integer determining what state the Game is in</returns>
-        private int CheckDice(int Die1, int Die2)
+        private int CheckDice(int die_1, int die_2)
         {
-            //creating 2 new dice
-            var dice = new List<int>
-            {
-                RollDice(),
-                RollDice()
-            };
+            
             //if the sum of the die is 7, 1 is returned indicating that the Game is over
-            if ((dice[0] + dice[1]) == 7)
+            if ((die_1 + die_2) == 7)
             {
                 return 0;
             }
 
             //if both die are the same it will add double the sum of the dice to the total
             //returning 1 to indicate that a double has been rolled
-            else if (dice[0] == dice[1])
+            else if (die_1 == die_2)
             {
                 
-                total = total + (2 * (dice[0] + dice[1]));
+                total = total + (2 * (die_1 + die_2));
                 return 1;
             }
             //adding the sum of the dice to the total
             else
             {
-                total = total + dice[0] + dice[1];
+                total = total + die_1 + die_2;
                 return 2;
             }
 
@@ -118,27 +108,22 @@ namespace OOP_assesment2
         /// </summary>
         /// <returns>both final die values in an array</returns>
         public int[] Testing()
-        {
-            
-            //creating 3 new blank integers
-            int die_1, die_2, check;
+        {      
 
             //a loop that will repeat the Game loop until a 7 is rolled
             while (true)
             {
                 //rolling 2 new dice objects
-                die_1 = RollDice();
-
-                die_2 = RollDice();
+                int[] dice = RollDie(2);
 
                 //cheking if the result of the dice roll is 7
-                check = CheckDice(die_1, die_2);
+                int check = CheckDice(dice[0], dice[1]);
 
                 //if 7 it will add both numbers to an array and return them so they can be checked
                 if (check == 0)
                 {
                     //adding both die rolls to an array
-                    int[] result = new int[2] { die_1, die_2};
+                    int[] result = new int[2] { dice[0], dice[1] };
 
                     //returning the array
                     return result;
