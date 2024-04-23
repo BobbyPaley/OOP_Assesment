@@ -89,10 +89,13 @@ namespace OOP_assesment2
                 if (turn == 1 && check == 0 || turn == 2 && check == 0)
                 {
                     //outputting a game over message for the current player
-                    Console.WriteLine("7 rolled, player "+turn+" is out!!");
+                    Console.WriteLine("7 rolled, player "+turn+" is out!!\n");
 
                     //outputting there final score
                     Console.WriteLine("final score = " + GetScore(turn));
+
+                    //sleeping the program for half a seccond
+                    Thread.Sleep(500);
 
                     //letting the game know to skip this players turn
                     GameOver(turn);
@@ -102,7 +105,7 @@ namespace OOP_assesment2
                 if (player_1_7 == true && player_2_7 == true)
                 {
                     //end of game messages
-                    Console.WriteLine("Both player out, game over");
+                    Console.WriteLine("Both player out, game over\n");
 
                     //displaying the final scores
                     Console.WriteLine("the final scores are: ");
@@ -110,20 +113,33 @@ namespace OOP_assesment2
                     //outputting both scores
                     DispScore();
 
-
+                    //checking if player one has a higher score
                     if (player_1 > player_2)
                     {
-                        Console.WriteLine("Player 1 wins with a score of " + player_1);
+                        //outputting a message to the user, saying player 
+                        //one wins and displaying the score
+                        Console.WriteLine("Player 1 wins with a score of " + player_1 + "\n");
+
+                        //returning player ones score
                         return player_1;
                     }
+                    //checking if player 2 has a higher score
                     else if(player_2 > player_1)
                     {
-                        Console.WriteLine("Player 2 wins with a score of " + player_2);
+                        //outputting a message to the user, saying player 
+                        //two wins and displaying the score
+                        Console.WriteLine("Player 2 wins with a score of " + player_2 + "\n");
+
+                        //returning player 2's score
                         return player_2;
                     }
+                    //if both players have the same score
                     else
                     {
-                        Console.WriteLine("DRAW!!");
+                        //outputting draw message
+                        Console.WriteLine("DRAW!!\n");
+
+                        //returning either score
                         return player_1;
                     }
                 }
@@ -131,58 +147,92 @@ namespace OOP_assesment2
                 //outputting then current scores
                 DispScore();
 
+                //changing the current turn
                 turn = Turn(turn);
+
+                //sleeping the application so it dosen't move to fast
                 Thread.Sleep(500);
             }
         }
-
+        /// <summary>
+        /// returns the score of the current player
+        /// </summary>
+        /// <param name="turn">the current turn</param>
+        /// <returns>score of current player</returns>
         private int GetScore(int turn)
         {
+            //if turn is one
             if (turn == 1)
             {
+                //return player ones score
                 return player_1;
             }
+            //if turn is 2
             else
             {
+                //returning player twos score
                 return player_2;
             }
         }
+        /// <summary>
+        /// lets the program know the current user has rolled a 7
+        /// </summary>
+        /// <param name="turn">current turn</param>
         private void GameOver(int turn)
         {
+            //if it is player ones turn
             if(turn == 1)
             {
+                //player one rolled 7 = true
                 player_1_7 = true;
             }
+            //if it is player twos turn
             else
             {
+                //player 2 rolled 7 = true
                 player_2_7 = true;
             }
         }
+        /// <summary>
+        /// displays the current scores
+        /// </summary>
         private void DispScore()
         {
+            //outputting an appropriate message
             Console.WriteLine("Player 1 = " + player_1 + "\nPlayer 2 = "+ player_2 + "\n");
         }
+        /// <summary>
+        /// changes the turn, checking if either player has rolled a 7
+        /// </summary>
+        /// <param name="turn">current turn</param>
+        /// <returns></returns>
         private int Turn(int turn)
         {
+            //if player one has rolled a 7
             if (player_1_7 == true)
             {
+                //return 2(player 2's turn)
                 return 2;
             }
+            //if player 2 has rolled a 7
             else if (player_2_7 == true)
             {
+                //returns 1 to indicate player ones turn
                 return 1;
             }
+            //if neither player has rolled a 7
             else
             {
+                //if turn is 1
                 if (turn == 1)
                 {
+                    //return player 2's turn
                     return 2;
                 }
-                else
-                {
-                    return 1;
-                }
+                //else return player 1
+                else { return 1; }
             }
+
         }
 
         /// <summary>
@@ -196,10 +246,13 @@ namespace OOP_assesment2
         /// <returns>an integer determining what state the Game is in</returns>
         private int CheckDice(int die_1, int die_2)
         {
+            //creating a new int to store the new score
             int new_Score = 0;
+
             //if the sum of the die is 7, 1 is returned indicating that the Game is over
             if ((die_1 + die_2) == 7)
             {
+                //returning 0 to indicate that a 7 has been rolled
                 return new_Score;
             }
 
@@ -207,14 +260,22 @@ namespace OOP_assesment2
             //returning 1 to indicate that a double has been rolled
             else if (die_1 == die_2)
             {
+                //outputting appropriate message
                 Console.WriteLine("double rolled 2x points!!");
+
+                //updating the score accordingly
                 new_Score  = new_Score + (2 * (die_1 + die_2));
+
+                //returning the score to add
                 return new_Score;
             }
             //adding the sum of the dice to the player_1
             else
             {
+                //adding the values together
                 new_Score = new_Score + die_1 + die_2;
+
+                //returning the score to add to the current player
                 return new_Score;
             }
 

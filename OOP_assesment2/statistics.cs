@@ -43,10 +43,12 @@ namespace OOP_assesment2
                     //incrementing the score
                     list[2] = (int.Parse(list[2]) + 1).ToString();
                 }
+                //writing the data to a new file
                 WriteFile(high_Score, int.Parse(list[1]), int.Parse(list[2]));
             }
             catch 
             {
+                //error message if the update function fails
                 Console.WriteLine("ERROR - data could not be updated");
             }
         }
@@ -60,7 +62,7 @@ namespace OOP_assesment2
             {
                 if (File.Exists("statistics.txt") == false)
                 {
-                    
+                    //creating a new file conatining only 3 zeros
                     WriteFile(0, 0, 0);
                 }
 
@@ -111,6 +113,7 @@ namespace OOP_assesment2
             }
             catch 
             { 
+                //output message if the data could not be written to file
                 Console.WriteLine("ERROR - could not write data to file");
             }
         }
@@ -136,6 +139,7 @@ namespace OOP_assesment2
             } 
             catch 
             { 
+                //error message if the data couln't be displayed
                 Console.WriteLine("ERROR - Couldn't read data"); 
             }
         }

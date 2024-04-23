@@ -133,10 +133,8 @@ namespace OOP_assesment2
         /// <returns>the winning player</returns>
         private int Game(int selection)
         {
-            try
-            {
-                //declaring the first turn
-                int turn = 1;
+            //declaring the first turn
+            int turn = 1;
 
                 //looping until there is a winner
                 while (true)
@@ -204,12 +202,7 @@ namespace OOP_assesment2
                 }
                 //when the while loop is broken it will return the turn
                 return turn;
-            }
-            catch
-            {
-                Console.WriteLine("an error has occured");
-                return 0;
-            }
+
         }
 
         /// <summary>
@@ -309,7 +302,7 @@ namespace OOP_assesment2
             }
             catch
             {
-                Console.WriteLine("an error has occured");
+                Console.WriteLine("an error has occured while updating score");
                 return 0;
             }
 
@@ -336,7 +329,7 @@ namespace OOP_assesment2
             }
             catch
             {
-                Console.WriteLine("an error has occured");
+                Console.WriteLine("an error has occured while updating score");
             }
         }
         /// <summary>
@@ -345,8 +338,6 @@ namespace OOP_assesment2
         /// <returns>bool saying if the win condition has been met</returns>
         private bool CheckWin()
         {
-            try
-            {
                 //checking if either score is >= 20
                 if (player_1 >= 20 || player_2 >= 20)
                 {
@@ -356,12 +347,7 @@ namespace OOP_assesment2
                 {
                     return false;
                 }
-            }
-            catch
-            {
-                Console.WriteLine("an error has occured");
-                return false;
-            }
+
         }
         /// <summary>
         /// will return the selected users score
@@ -388,7 +374,6 @@ namespace OOP_assesment2
         /// <returns></returns>
         public int[] Testing()
         {
-            try {  
             //creating an int to store the score before points are added
             int score_Before = 0;
 
@@ -418,12 +403,8 @@ namespace OOP_assesment2
                     }
                 }
                 
-            }
-            catch
-            {
-                Console.WriteLine("an error has occured");
-                return null;
-            }
+            
+
         }
     }
 }
