@@ -237,7 +237,7 @@ namespace OOP_assesment2
                 else if (selection == 1 && turn == 2)
                 {
                     //getting a random number between 1 and 10
-                    int random = RandomInstance.Next(1, 10);
+                    int random = RollNum(10);
 
                     //if the number is less than 3 it will roll all of the dice
                     if (random < 3)
@@ -252,12 +252,17 @@ namespace OOP_assesment2
                         return 1;
                     }
                 }
-                return 1;
-
-
-            
-            
-          
+                return 1;         
+        }
+        /// <summary>
+        /// generates a random num taking num as parameter
+        /// </summary>
+        /// <param name="num">upper range for the random num</param>
+        /// <returns>random number</returns>
+        private int RollNum(int num)
+        {
+            //returning a random number between 1 and num
+            return RandomInstance.Next(1, num);
         }
         /// <summary>
         /// displays all 5 dice objects, overriding the DisplayRoll function within game class

@@ -19,7 +19,10 @@ namespace OOP_assesment2
         /// <returns>a new die number between 1 and 6</returns>
         public virtual int RollNum()
         {
+            //creating new dice object
             var Dice = new Die();
+
+            //returning new dice roll
             return Dice.Roll();
         }
 
@@ -31,6 +34,7 @@ namespace OOP_assesment2
         /// <returns>new array of length n</returns>
         protected int[] NewArray(int n)
         {
+            //returning a new array of length n
             return new int[n];
         }
         protected int[] RollDie(int x)

@@ -22,6 +22,12 @@ namespace OOP_assesment2
                 //creating a list of strings from the items in statistics.txt
                 List<string> list = ReadFile();
 
+                if (list == null)
+                {
+                    Console.WriteLine("ERROR - file could not be found");
+                    return;
+                }
+
                 int high_Score = int.Parse(list[0]);
                 //cheking if the Game type is sevens and if the score is
                 //higher than the current high score
@@ -34,19 +40,19 @@ namespace OOP_assesment2
                 if (game == 1)
                 {
                     //incrementing the amount of games played
-                    list[1] = int.Parse(list[1] + 1).ToString();
+                    list[1] = (int.Parse(list[1]) + 1).ToString();
                 }
                 //if Game type is 2 it will increment the amount of threes played
                 else if (game == 2)
                 {
                     //incrementing the score
-                    list[2] = int.Parse(list[2] + 1).ToString();
+                    list[2] = (int.Parse(list[2]) + 1).ToString();
                 }
                 WriteFile(high_Score, int.Parse(list[1]), int.Parse(list[2]));
             }
             catch 
             {
-                Console.WriteLine("an error has occured");
+                Console.WriteLine("ERROR - data could not be updated");
             }
         }
         /// <summary>
@@ -57,11 +63,21 @@ namespace OOP_assesment2
         {
             try
             {
-                
+                //getting the file location of statistics.txt
                 string fileName = Path.GetFullPath("statistics.txt");
                 
                 //reading the data in statistics.txt
                 var log_File = File.ReadAllLines(fileName);
+
+                //if there is less than 3 lines in the txt file 
+                if (log_File.Length < 3)
+                {
+                    //write 3 0's into the file
+                    WriteFile(0, 0, 0);
+
+                    //setting log_File to the new data
+                    log_File = File.ReadAllLines(fileName);
+                }
                 
                 //putting all of the data into a list of strings
                 var log_List = new List<string>(log_File);
@@ -69,7 +85,8 @@ namespace OOP_assesment2
                 //returning the final list of data
                 return log_List;
             }
-            catch { return null; }
+            //returns null if there is an error getting the file
+            catch { return new List<string>(null); }
         }
             
         /// <summary>
@@ -103,7 +120,7 @@ namespace OOP_assesment2
             }
             catch 
             { 
-                Console.WriteLine("an error has occured");
+                Console.WriteLine("ERROR - could not write data to file");
             }
         }
 
@@ -128,7 +145,7 @@ namespace OOP_assesment2
             } 
             catch 
             { 
-                Console.WriteLine("an error has occured"); 
+                Console.WriteLine("ERROR - Couldn't read data"); 
             }
         }
         
