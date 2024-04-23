@@ -42,6 +42,7 @@ namespace OOP_assesment2
                     //checking if the die equals 7
                     Debug.Assert(die[0] + die[1] == 7);
 
+                    WriteLog("sevens die adds to 7 "+die[0]+" + " + die[1] + " = 7");
                     //outputting the 2 dice rolls
                     DisplayRoll(die);
 
@@ -96,7 +97,7 @@ namespace OOP_assesment2
                     Console.WriteLine("final score = " + results[1]);
 
                     //updating the logbook
-                    WriteLog("sevens score is >= 20");
+                    WriteLog("threes score is >= 20");
 
                     //returning back to Game class
                     return;
