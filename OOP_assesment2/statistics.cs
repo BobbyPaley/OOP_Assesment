@@ -22,11 +22,6 @@ namespace OOP_assesment2
                 //creating a list of strings from the items in statistics.txt
                 List<string> list = ReadFile();
 
-                if (list == null)
-                {
-                    Console.WriteLine("ERROR - file could not be found");
-                    return;
-                }
 
                 int high_Score = int.Parse(list[0]);
                 //cheking if the Game type is sevens and if the score is
@@ -63,21 +58,17 @@ namespace OOP_assesment2
         {
             try
             {
+                if (File.Exists("statistics.txt") == false)
+                {
+                    
+                    WriteFile(0, 0, 0);
+                }
+
                 //getting the file location of statistics.txt
                 string fileName = Path.GetFullPath("statistics.txt");
                 
                 //reading the data in statistics.txt
                 var log_File = File.ReadAllLines(fileName);
-
-                //if there is less than 3 lines in the txt file 
-                if (log_File.Length < 3)
-                {
-                    //write 3 0's into the file
-                    WriteFile(0, 0, 0);
-
-                    //setting log_File to the new data
-                    log_File = File.ReadAllLines(fileName);
-                }
                 
                 //putting all of the data into a list of strings
                 var log_List = new List<string>(log_File);
