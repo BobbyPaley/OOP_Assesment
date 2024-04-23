@@ -1,16 +1,21 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace OOP_assesment2
 {
     internal class Sevens__out : game
     {
-        // a public variable within the class to store the total score
-        public int total = 0;
+        // a public variable within the class to store the player_1 score
+        public int player_1 = 0, player_2 = 0;
         
+        //creating booleans to store if either player has rolled a seven
+        public bool player_1_7 = false, player_2_7 = false;
+
         /// <summary>
         /// will roll 2 dice until a 7 is rolled, if there is a 2
         /// of a kind the score will double
@@ -20,55 +25,169 @@ namespace OOP_assesment2
         {
             //introductoary messages
             Console.WriteLine("Welcome to sevens out");
-            Console.WriteLine("press enter to roll again");
 
+            //asking the user if they would like one or 2 player
+            int selection = NewSelection("1 or 2 player", 2, 1);
+
+            //outputting a message telling the user to press enter to progress the game
+            Console.WriteLine("press enter to roll");
+
+            //setting the first turn
+            int turn = 1;
            
             //looping until win condition is met    
             while (true)
             {
-                //creating 2 dice objects
-                int[] dice = RollDie(2);
-                
+                //creating a new empty array to store 2 dice objects
+                int[] dice = new int[2]; 
+
+                //outputting the current turn
+                Console.WriteLine("Player " + turn + "'s turn: ");
+
+
+                //if it is one player and turn 2 the game will 
+                //automaticly roll the dice with no user input
+                if (turn == 2 && selection == 1) 
+                {
+                    //rolling new dice and setting to array
+                    dice = RollDie(2);                   
+                }
+                //if it is wither 2 player or turn 1
+                else
+                {
+                    //telling the user to press enter to roll a dice
+                    Console.WriteLine("press enter to roll dice");
+
+                    //waiting for input
+                    Console.ReadLine();
+
+                    //setting the new dice rolled to the array
+                    dice = RollDie(2);
+
+                }
                 //outputting the results of the rolls and the roll number               
                 DisplayRoll(dice);
 
-                //calling the check function to do nececary actions on the 
-                //result of the die rolls
+                //calling the check function to add the scores
                 int check = CheckDice(dice[0], dice[1]);
+
+                //checking the turn
+                if (turn == 1)
+                {
+                    //adding the neccecary score to player 1
+                    player_1 = player_1 + check;
+                }
+                //if it is player 2's turn
+                else
+                {
+                    //adding the neccecary score to player 2
+                    player_2 = player_2 + check;
+                }
 
                 //if 0 is returned from the CheckDice function, the Game is
                 //over as the result of the die is 7
-                if (check == 0)
+                if (turn == 1 && check == 0 || turn == 2 && check == 0)
                 {
-                    //final output messages, displaying the final scores
-                    Console.WriteLine("7 rolled, gameover");
+                    //outputting a game over message for the current player
+                    Console.WriteLine("7 rolled, player "+turn+" is out!!");
 
-                    Console.WriteLine("final score = " + total);
+                    //outputting there final score
+                    Console.WriteLine("final score = " + GetScore(turn));
 
-                    //returning the final score
-                    return total;
+                    //letting the game know to skip this players turn
+                    GameOver(turn);
                 }
 
-                //if 1 is returned, both die are the same so a message is outputted
-                else if (check == 1)
+                //if both players are out of the game
+                if (player_1_7 == true && player_2_7 == true)
                 {
-                    Console.WriteLine("double rolled, 2x score");
+                    //end of game messages
+                    Console.WriteLine("Both player out, game over");
+
+                    //displaying the final scores
+                    Console.WriteLine("the final scores are: ");
+
+                    //outputting both scores
+                    DispScore();
+
+
+                    if (player_1 > player_2)
+                    {
+                        Console.WriteLine("Player 1 wins with a score of " + player_1);
+                        return player_1;
+                    }
+                    else if(player_2 > player_1)
+                    {
+                        Console.WriteLine("Player 2 wins with a score of " + player_2);
+                        return player_2;
+                    }
+                    else
+                    {
+                        Console.WriteLine("DRAW!!");
+                        return player_1;
+                    }
                 }
 
-                //outputting then current total
-                Console.WriteLine("total = " + total);
+                //outputting then current scores
+                DispScore();
 
-                //waiting for the user to press a button before the next set of di are rolled
-                Console.ReadLine();
+                turn = Turn(turn);
+                Thread.Sleep(500);
             }
-            
-
         }
 
+        private int GetScore(int turn)
+        {
+            if (turn == 1)
+            {
+                return player_1;
+            }
+            else
+            {
+                return player_2;
+            }
+        }
+        private void GameOver(int turn)
+        {
+            if(turn == 1)
+            {
+                player_1_7 = true;
+            }
+            else
+            {
+                player_2_7 = true;
+            }
+        }
+        private void DispScore()
+        {
+            Console.WriteLine("Player 1 = " + player_1 + "\nPlayer 2 = "+ player_2 + "\n");
+        }
+        private int Turn(int turn)
+        {
+            if (player_1_7 == true)
+            {
+                return 2;
+            }
+            else if (player_2_7 == true)
+            {
+                return 1;
+            }
+            else
+            {
+                if (turn == 1)
+                {
+                    return 2;
+                }
+                else
+                {
+                    return 1;
+                }
+            }
+        }
 
         /// <summary>
         /// it will check the result of the 2 die rolled, if they are the same it 
-        /// will add double the sum of the die to the total.
+        /// will add double the sum of the die to the player_1.
         /// if the sum is 7 it will return 7 to indicate that the Game is over
         /// else it will ad both dice to the sum
         /// </summary>
@@ -77,26 +196,26 @@ namespace OOP_assesment2
         /// <returns>an integer determining what state the Game is in</returns>
         private int CheckDice(int die_1, int die_2)
         {
-            
+            int new_Score = 0;
             //if the sum of the die is 7, 1 is returned indicating that the Game is over
             if ((die_1 + die_2) == 7)
             {
-                return 0;
+                return new_Score;
             }
 
-            //if both die are the same it will add double the sum of the dice to the total
+            //if both die are the same it will add double the sum of the dice to the player_1
             //returning 1 to indicate that a double has been rolled
             else if (die_1 == die_2)
             {
-                
-                total = total + (2 * (die_1 + die_2));
-                return 1;
+                Console.WriteLine("double rolled 2x points!!");
+                new_Score  = new_Score + (2 * (die_1 + die_2));
+                return new_Score;
             }
-            //adding the sum of the dice to the total
+            //adding the sum of the dice to the player_1
             else
             {
-                total = total + die_1 + die_2;
-                return 2;
+                new_Score = new_Score + die_1 + die_2;
+                return new_Score;
             }
 
         }
@@ -108,9 +227,6 @@ namespace OOP_assesment2
         public int[] Testing()
         {
             //keeping the code within a try block making sure no errors happen
-            try
-            {
-
 
                 //a loop that will repeat the Game loop until a 7 is rolled
                 while (true)
@@ -134,16 +250,7 @@ namespace OOP_assesment2
                     }
 
                 }
-            }
-            //if an error occurs
-            catch
-            {
-                //outputting an appropriate message
-                Console.WriteLine("error has occured");
 
-                //returning null
-                return null;
-            }
 
         }
     }

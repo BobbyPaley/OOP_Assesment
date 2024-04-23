@@ -22,28 +22,27 @@ namespace OOP_assesment2
                 //creating a list of strings from the items in statistics.txt
                 List<string> list = ReadFile();
 
+                int high_Score = int.Parse(list[0]);
                 //cheking if the Game type is sevens and if the score is
                 //higher than the current high score
                 if (int.Parse(list[0]) < score && game == 1)
                 {
                     //outputting an appropriate message
-                    Console.WriteLine("new high score");
-
-                    //changing the highscore in the text file
-                    WriteFile(0, score.ToString());
+                    high_Score = score;
                 }
                 //if Game type is 1 it will increment the amount of sevens played
                 if (game == 1)
                 {
                     //incrementing the amount of games played
-                    WriteFile(1, (int.Parse(list[1]) + 1).ToString());
+                    list[1] = int.Parse(list[1] + 1).ToString();
                 }
                 //if Game type is 2 it will increment the amount of threes played
                 else if (game == 2)
                 {
                     //incrementing the score
-                    WriteFile(2, (int.Parse(list[2]) + 1).ToString());
+                    list[2] = int.Parse(list[2] + 1).ToString();
                 }
+                WriteFile(high_Score, int.Parse(list[1]), int.Parse(list[2]));
             }
             catch 
             {
@@ -58,9 +57,12 @@ namespace OOP_assesment2
         {
             try
             {
+                
+                string fileName = Path.GetFullPath("statistics.txt");
+                
                 //reading the data in statistics.txt
-                var log_File = File.ReadAllLines("statistics.txt");
-
+                var log_File = File.ReadAllLines(fileName);
+                
                 //putting all of the data into a list of strings
                 var log_List = new List<string>(log_File);
 
@@ -71,24 +73,38 @@ namespace OOP_assesment2
         }
             
         /// <summary>
-        /// write the relevant data to statistics.txt
+        /// updates the data in the txt file accordingly
         /// </summary>
-        /// <param name="line"></param>
-        /// <param name="new_Num"></param>
-        private void WriteFile(int line, string new_Num)
+        /// <param name="high_Score">the current / new highscore</param>
+        /// <param name="game_1">the amount of sevens played</param>
+        /// <param name="game_2">the amount of threes played</param>
+        private void WriteFile(int high_Score, int game_1, int game_2)
         {
+
             try
             {
-                //creating a copy of the file
-                string[] arr_Line = File.ReadAllLines("statistics.txt");
+                //using the stream writter to store the data in a txt file
+                using (StreamWriter writer = new StreamWriter("statistics.txt", false))
+                {
+                    //writting out the highscore on the first line
+                    writer.WriteLine(high_Score);
 
-                //replacing the data
-                arr_Line[line] = new_Num;
+                    //the amount of sevens played
+                    writer.WriteLine(game_1);
 
-                //replacing the data in the file with the new data
-                File.WriteAllLines("statistics.txt", arr_Line);
+                    //the amount of threes played
+                    writer.WriteLine(game_2);
+
+                    //closing the writter
+                    writer.Close();
+                  
+                }
+            //outputting an error message if an exception is thrown
             }
-            catch { Console.WriteLine("an error has occured"); }
+            catch 
+            { 
+                Console.WriteLine("an error has occured");
+            }
         }
 
         /// <summary>

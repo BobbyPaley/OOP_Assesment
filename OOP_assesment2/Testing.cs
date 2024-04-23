@@ -5,6 +5,8 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Configuration;
+using System.IO;
 
 namespace OOP_assesment2
 {
@@ -62,6 +64,9 @@ namespace OOP_assesment2
                     //checking that score adds correctly
                     Debug.Assert((results[0] + results[2]) == results[1]);
 
+                    //updating the logbook
+                    WriteLog("die add up to the correct values");
+
                     //outputing the results into the terminal
                     Console.WriteLine("points before(" + results[0] + ") + points to add(" + results[2] + ") = " + results[1]);
 
@@ -79,12 +84,19 @@ namespace OOP_assesment2
                     {
                         Debug.Assert(results[2] == 12);
                     }
+                    //updating the logbook
+
+                    WriteLog("points match values as expeted");
 
                     //checking that the final score is >= 20
+
                     Debug.Assert(results[1] >= 20);
 
                     //outputting the final score to the user
                     Console.WriteLine("final score = " + results[1]);
+
+                    //updating the logbook
+                    WriteLog("sevens score is >= 20");
 
                     //returning back to Game class
                     return;
@@ -152,6 +164,9 @@ namespace OOP_assesment2
                     //outputting appropriate message to the user
                     Console.WriteLine("die within 10% of expected values");
 
+                    //updating the log book
+                    WriteLog("die within expected range of values when testing with " + temp + " die.");
+
                     //returning out of test function
                     return;
                 }
@@ -184,6 +199,19 @@ namespace OOP_assesment2
             }
             //else false
             else { return false; }
+
+        }/// <summary>
+        /// adding the testing messages to the log book
+        /// </summary>
+        /// <param name="message">message to be added to the logbook</param>
+        public static void WriteLog(string message)
+        {
+            //creating a new instance of stream writter
+            using (StreamWriter writer = new StreamWriter("logFile.txt", true))
+            {
+                //writing the message to the log file with the time of report
+                writer.WriteLine($"{DateTime.Now} : {message}");
+            }
         }
 
     }

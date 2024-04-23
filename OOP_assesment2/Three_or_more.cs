@@ -20,8 +20,7 @@ namespace OOP_assesment2
         /// </summary>
         public void Main()
         {
-            try
-            {
+
                 //getting the user selection
                 int selection = NewSelection("1 or 2 player", 2, 1);
 
@@ -31,12 +30,7 @@ namespace OOP_assesment2
                 //outputting the winner and their score, calling the getscore function
                 //to get the corresponding score for the winner
                 Console.WriteLine("player " + winner + " wins with a score of " + GetScore(winner));
-            }
-            catch
-            {
-                Console.WriteLine("an error has occured");
-                return;
-            }
+
         }
         
         /// <summary>
@@ -227,8 +221,7 @@ namespace OOP_assesment2
         /// <returns>the selection to roll all die or roll unmatching</returns>
         private int Selection(int selection, int turn)
         {
-            try
-            {
+ 
                 //creting an int to store the answer
                 int ans = 0;
 
@@ -262,12 +255,8 @@ namespace OOP_assesment2
                 return 1;
 
 
-            }
-            catch
-            {
-                Console.WriteLine("an error has occured");
-                return 0;
-            }        
+            
+            
           
         }
         /// <summary>

@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,6 +22,7 @@ namespace OOP_assesment2
             var Dice = new Die();
             return Dice.Roll();
         }
+
 
         /// <summary>
         /// creates a new array of size n
@@ -99,6 +102,7 @@ namespace OOP_assesment2
             //outputting all dice
             Console.WriteLine("dice = " + dice[0] + ", " + dice[1]);
         }
+
         /// <summary>
         /// creating an instance of the random function so it isn't
         /// called multiple times throughout the code
