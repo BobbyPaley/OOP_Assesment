@@ -264,7 +264,11 @@ namespace OOP_assesment2
         public override void DisplayRoll(int[] new_Dice)
         {
             //outputting all 5 dice
-            Console.WriteLine("you rolled " + new_Dice[0] + ", " + new_Dice[1] + ", " + new_Dice[2] + ", " + new_Dice[3] + ", " + new_Dice[4]);
+            //Console.WriteLine("you rolled " + new_Dice[0] + ", " + new_Dice[1] + ", " + new_Dice[2] + ", " + new_Dice[3] + ", " + new_Dice[4]);
+            foreach (int dice in new_Dice)
+            {
+                Console.WriteLine(dice);
+            }
         }
 
 
